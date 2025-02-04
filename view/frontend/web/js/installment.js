@@ -197,23 +197,6 @@ define([
         },
         /**
          *
-         * @param installment
-         * @returns {*}
-         */
-        getHigherInstallment: function (installment) {
-            let higher = null;
-            for (let i = this.options.maximum_quantity_installments; i >= 1; i--) {
-                if (installment[i]) {
-                    if (!higher) {
-                        higher = installment[i];
-                    }
-                }
-            }
-
-            return higher;
-        },
-        /**
-         *
          * @param price
          * @returns {[]}
          */
@@ -298,15 +281,15 @@ define([
             let installmentDiv = ($(priceElement).closest('.installments').length > 0) ? $(priceElement).closest('.installments') : null;
             if (installments) {
                 let data = {
-                    'installment': this.getHigherInstallment(installments),
+                    'bestInstallment': this.getBestInstallment(installments),
                     'discounts': this.renderDiscounts(this.getDiscounts(price))
                 };
 
                 template = template
                     .replace('{{default}}', '<div class="default"></div>')
-                    .replace('{{qty}}', '<div class="installment">' + data.installment.installments_qty)
-                    .replace('{{value}}', data.installment.installment_value)
-                    .replace('{{interest}}', (this.renderInterest(data.installment)) + '</div>')
+                    .replace('{{qty}}', '<div class="best-installment">' + data.bestInstallment.installments_qty)
+                    .replace('{{value}}', data.bestInstallment.installment_value)
+                    .replace('{{interest}}', (this.renderInterest(data.bestInstallment)) + '</div>')
                     .replace('{{discounts}}', '<div class="discounts">' + data.discounts + '</div>');
                 if (installmentDiv) {
                     $(priceElement).insertBefore($(installmentDiv));
