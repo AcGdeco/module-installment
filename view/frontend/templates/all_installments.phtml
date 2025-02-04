@@ -1,0 +1,30 @@
+<?php
+// @codingStandardsIgnoreFile
+
+/** @var Backendorf\Installment\Block\AllInstallments $block */
+
+if ($block->renderAllInstallments()) {
+    ?>
+    <div
+        id="installments-accordion"
+        class="installments"
+        data-mage-init='{
+        "accordion":{
+            "collapsible": true,
+            "openedState": "active"
+        }}'>
+        <div data-role="collapsible">
+            <div data-role="trigger">
+                <h5><?= __('More installment options'); ?></h5>
+            </div>
+        </div>
+        <div data-role="content">
+            <div class="all-installments-content"></div>
+            <span class="footer-message">
+                <?= __('The values presented are for consultation only, the real value of the parcel will be displayed at the end of the order.'); ?>
+            </span>
+        </div>
+    </div>
+    <?php
+}
+?>
