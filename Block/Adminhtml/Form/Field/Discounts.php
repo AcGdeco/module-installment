@@ -23,7 +23,7 @@ class Discounts extends AbstractFieldArray
             'percentage',
             [
                 'label' => __('Percentage'),
-                'class' => 'required-entry validate-currency-dollar'
+                'class' => 'required-entry validate-number'
             ]
         );
         $this->_addAfter = false;
